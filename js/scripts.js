@@ -12,7 +12,7 @@ var gameController = {
 function Hangman() {
     // properties
     this.runGame = true;
-    this.words = ["apple", "pineapples", "apples", "kiwi", "peach", "bananas", "reserved", "pears", "mangoes", "Guava", "mountain", "hills", "valleys", "rivers", "streams", "lakes"];
+    this.words = ["apple", "pineapples", "apples", "kiwi", "peach", "bananas", "reserved", "pears", "mangoes", "guava", "mountain", "hills", "valleys", "rivers", "streams", "lakes"];
     this.word = '';
     this.displayString = '';
     this.chances = maxChances;
@@ -50,13 +50,19 @@ function Hangman() {
         var letterOfWord = gameController.input.value;
         var lowerLetters = letterOfWord.toLowerCase();
 
-        _this.previousGuesses.push(lowerLetters);
-        
-        
+        var check = _this.previousGuesses.find(function (element) { return element === lowerLetters; });
+        console.log(check);
+
+        if (check == undefined) {
+            _this.previousGuesses.push(lowerLetters);
+        }
+
         if (_this.word.includes(lowerLetters)) {
-            
+
             //Update the display string (showin the letters)
             for (var i = 0; i < _this.word.length; i++) {
+
+
                 // Loop through each letter in our word, one by one
                 var currentChar = _this.word.substr(i, 1);
                 //If he current chaacter matches what we have guessed
@@ -69,65 +75,49 @@ function Hangman() {
 
                     // We still have to output our code to the browser
                     gameController.word.textContent = _this.displayString;
-                    
-                    
+
+
                 }
             }
-
 
             // Has the word been completely solved?
             if (!gameController.word.textContent.includes('_')) {
                 // Wins
                 _this.win();
             }
-        } else {
+        } else if (check == undefined) {
             // Letter is not in word
             //Burn one chance
             _this.chances--;
             //update user interface
             gameController.chances.textContent = _this.chances;
-
-            //Check for Game Over
-
-            if (_this.chances < 0) {
-                // Loses
-                _this.lose();
-            }
+        } else {
+            alert("Guess already made. Need not enter previous guesses again, please");
         }
+        //Check for Game Over
+
         gameController.input.value = '';
         gameController.previousGuesses.textContent = _this.previousGuesses;
-       
 
     };
 
-    // this.win() = function () {
-    //     if (confirm('You Win! Play again?')) {
-    //         this.setup();
-    //     }
-    // };
+
+    this.win = function () {
+        if (confirm('Congratulations!! You Win! Do You Wish to Play again?')) {
+            this.setup();
+        }
+    };
 
 
-    // this.lose() = function () {
-    //     if (confirm('You lose! Play again?')) {
-    //         this.setup();
-    //     }
-    // };
-
+    this.lose = function () {
+        if (confirm('Sorry, You lose! Play again?')) {
+            this.setup();
+        }
+    };
 };
+
+
 
 //END OF FILE
 var game = new Hangman();
 game.run();
-
-//https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_contentt
-
-// windows.onload = function() {
-//     var element = document.getElementById('editable');
-//     //Toggle contentEditable = true on click
-//     element.onclick = function(e) {
-//         this.contentEditable = true;
-//         this.focus();
-//         this.style.backgroundColor = '#E0E0E0';
-
-//     }
-// }
