@@ -40,7 +40,7 @@ function Hangman() {
         gameController.word.textContent = this.displayString;// get our value to show on screen
         gameController.chances.textContent = this.chances;// get our value to show on screen
         // get our values to show in console
-        console.log(this.word);
+        //console.log(this.word);
     };
 
 
@@ -51,8 +51,7 @@ function Hangman() {
         var lowerLetters = letterOfWord.toLowerCase();
 
         var check = _this.previousGuesses.find(function (element) { return element === lowerLetters; });
-        console.log(check);
-
+        
         if (check == undefined) {
             _this.previousGuesses.push(lowerLetters);
         }
@@ -102,9 +101,7 @@ function Hangman() {
 
         gameController.input.value = '';
         gameController.previousGuesses.textContent = _this.previousGuesses;
-
     };
-
 
     this.win = function () {
         if (confirm('Congratulations!! You Win! Do You Wish to Play again?')) {
@@ -118,7 +115,6 @@ function Hangman() {
         }
     };
 };
-
 
 
 //END OF FILE

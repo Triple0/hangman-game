@@ -2,3 +2,11 @@
     letter-spacing: 2vw;
 }
 
+body {
+    background-image: url('../img/hangman1.png');
+    background-repeat: no-repeat;
+    color: rgba(241, 147, 7, 0.993);
+    font-size: 30px;
+    text-align: center;
+    background-position: center;
+}
