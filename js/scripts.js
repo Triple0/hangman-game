@@ -50,8 +50,8 @@ function Hangman() {
         var letterOfWord = gameController.input.value;
         var lowerLetters = letterOfWord.toLowerCase();
 
-        _this.previousGuesses.push(letterOfWord);
-        console.log(_this.previousGuesses);
+        _this.previousGuesses.push(lowerLetters);
+        
         
         if (_this.word.includes(lowerLetters)) {
             
@@ -69,6 +69,7 @@ function Hangman() {
 
                     // We still have to output our code to the browser
                     gameController.word.textContent = _this.displayString;
+                    
                     
                 }
             }
@@ -94,6 +95,8 @@ function Hangman() {
             }
         }
         gameController.input.value = '';
+        gameController.previousGuesses.textContent = _this.previousGuesses;
+       
 
     };
 
