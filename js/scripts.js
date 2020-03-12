@@ -91,6 +91,10 @@ function Hangman() {
             _this.chances--;
             //update user interface
             gameController.chances.textContent = _this.chances;
+
+            if (_this.chances < 0) {
+                _this.lose();
+            }
         } else {
             alert("Guess already made. Need not enter previous guesses again, please");
         }
@@ -107,7 +111,6 @@ function Hangman() {
             this.setup();
         }
     };
-
 
     this.lose = function () {
         if (confirm('Sorry, You lose! Play again?')) {
